@@ -1,0 +1,91 @@
+@import '@/assets/styles/tools/mixins';
+
+.users {
+  @include _576 {
+    padding: 3rem 3.5rem;
+  }
+
+  padding: 2rem 1.5rem;
+  background: #ffed52;
+  border-radius: 2rem;
+
+  &__block {
+    display: grid;
+    grid-template-columns: 1fr;
+    @include _992 {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @include _1920 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  &__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 252, 229, .6);
+    border-radius: 0.5rem;
+    transition: .3s;
+    &:hover{
+      background: rgba(255, 252, 229, .8);
+      transform: scale(1.02);
+    }
+    @include _992 {
+      flex-direction: column;
+      margin: 0;
+    }
+    &-photo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 4rem;
+      height: 4rem;
+      margin-right: 1.5rem;
+      background: #fff;
+      border: 0.2rem solid #000;
+      border-radius: 50%;
+      text-align: center;
+      flex-shrink: 0;
+      span {
+        font-size: 1.3rem;
+        font-weight: 600;
+        line-height: 100%;
+      }
+      img{
+        display: none;
+      }
+      @include _768 {
+          width: 5rem;
+          height: 5rem;
+          overflow: hidden;
+          span{
+            display: none;
+          }
+          img{
+            width: 6rem;
+            height: 6rem;
+            display: block;
+          }
+      }
+      @include _992 {
+        width: 7rem;
+        height: 7rem;
+        margin: 0 auto 1rem;
+      }
+    }
+    &-name {
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 120%;
+      span {
+        font-size: 0.8rem;
+      }
+      @include _992 {
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+@import '@/assets/styles/tools/mixins';
+
+html {
+  font-size: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  // font-variant: no-common-ligatures;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  color: #000;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+dl,
+ol,
+ul {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  background-color: transparent;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+    text-decoration: none;
+  }
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+button {
+  padding: 0;
+  background: unset;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.container {
+  @include _576 {
+    padding: 0 3rem;
+  }
+
+  @include _768 {
+    max-width: 72rem;
+    padding: 0;
+  }
+
+  @include _992 {
+    max-width: 96rem;
+  }
+
+  @include _1200 {
+    max-width: 114rem;
+  }
+
+  @include _1920 {
+    max-width: 128rem;
+  }
+
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.title {
+  @include _768 {
+    margin-bottom: 2.5rem;
+    font-size: 3.4rem;
+  }
+
+  margin-bottom: 1.5rem;
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 125%;
+}
+.main {
+  min-height: 100vh;
+  padding-top: 7rem;
+}
+.notlink {
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e5ffb5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #92005a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
