@@ -1,8 +1,15 @@
 //Функции для работы с компонентнами
 @use 'sass:math';
 
+$whitebg: rgba(255, 255, 255, 0.3);
+$white: #fff;
+$black: #000;
+$orange: #ffb400;
+
+
+
 @function rem($px) {
-  @return math.div($px, 16) + rem;
+  @return math.div($px, 10) + rem;
 }
 
 @mixin _4k {

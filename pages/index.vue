@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
     <Registration />
-  </div>
 </template>
 
 <script>

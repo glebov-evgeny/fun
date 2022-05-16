@@ -3,9 +3,8 @@ export default {
   router: {
     base: '/fun/'
   },
-
   head: {
-    title: 'portfolio',
+    title: 'fun',
     htmlAttrs: {
       lang: 'ru',
     },
@@ -39,6 +38,22 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyAptIhRVjAu3dj_BUvttzxlbQmNt9b4jSg",
+          authDomain: "funn-dc353.firebaseapp.com",
+          projectId: "funn-dc353",
+          storageBucket: "funn-dc353.appspot.com",
+          messagingSenderId: "1009575989187",
+          appId: "1:1009575989187:web:9dd10ad06e7ebaed4a3776"
+        },
+        services: {
+          auth: true // Just as example. Can be any other service.
+        }
+      }
+    ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
