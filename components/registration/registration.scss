@@ -5,8 +5,8 @@
   border-left: rem(1) solid $whitebg;
   border-top: rem(1) solid $whitebg;
   backdrop-filter: blur(1rem);
-  box-shadow: rem(20) rem(20) rem(40) rem(-6) rgba(0,0,0,.2);
-  border-radius: rem(15);
+  border-radius: rem(30);
+  box-shadow:rem(8) rem(8) rem(14) #c8d0e7, rem(-2) rem(-2) rem(18) #ffffff;
   text-align: center;
   position: relative;
   transition: all .2s ease-in-out;
@@ -18,30 +18,53 @@
     max-width: 40rem;
   }
   &__title{
-    color: #fff;
+    color: #000;
   }
   .form{
-    // display: flex;
-    // width: 100%;
+    display: flex;
+    flex-direction: column;
     &-group{
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+    }
+    &-label{
       width: 100%;
+      text-align: left;
+      margin-bottom: rem(10);
+      &:last-child{
+        margin: 0;
+      }
+    }
+    &-info{
+      font-size: rem(14);
+      color: #ff1c1c;
+      margin: rem(5) auto 0;
     }
     &-input{
       display: flex;
       width: 100%;
       min-height: rem(50);
+      border: none;
       border-radius: rem(10);
-      border: rem(1) solid $white;
       outline: none;
-      font-size: rem(16);
+      font-size: rem(14);
       font-weight: 500;
       color: $black;
       padding: rem(10) rem(20);
-      margin-bottom: rem(15);
-      &:last-child{
-        margin: 0;
+      box-shadow: inset rem(2) rem(2) rem(5) #c8d0e7, inset rem(-2) rem(-2) rem(5) #fff;
+      background: none;
+      transition: .3s;
+      &:focus {
+        outline: none;
+        box-shadow: rem(3) rem(3) rem(6) #c8d0e7, rem(-2) rem(-2) rem(5) #fff;
+      }
+      &.error{
+        box-shadow: inset rem(2) rem(2) rem(5) #ffcdfe, inset rem(-2) rem(-2) rem(5) #fff;
+        color: #ff1c1c;
+        &::placeholder{
+          color: #ff1c1c;
+        }
       }
     }
     &-btn{
@@ -51,20 +74,39 @@
       width: 100%;
       min-height: rem(50);
       border-radius: rem(10);
-      border: rem(1) solid $orange;
-      background: $orange;
+      border: none;
+      background: #6d5dfc;
       font-size: rem(16);
       font-weight: 600;
       letter-spacing: rem(2);
       text-transform: uppercase;
-      color: #000;
+      color: #fff;
       margin: rem(25) auto 0;
+      box-shadow: inset rem(2) rem(2) rem(10) #8abdff, inset rem(-2) rem(-2) rem(10) #5b0eeb, rem(3) rem(3) rem(6) #c8d0e7, rem(-2) rem(-2)  rem(5) #FFFFFF;
+      transition: 0.3s ease;
+      &:active {
+        box-shadow: inset rem(2) rem(2) rem(10) #5b0eeb, inset rem(-2) rem(-2) rem(10) #8abdff;
+      }
+    }
+    &-check{
+      font-size: rem(12);
+      margin: rem(20) auto 0;
     }
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
+}
+.title-show-enter-active {
+  animation: show .3s ease forwards;
+}
+.title-show-enter {
+  @keyframes show {
+    from{
+      opacity: 0;
+      transform: translateY(rem(-15));
+    }
+    to{
+      opacity: 1;
+      transform: translateY(rem(0));
+    }
   }
 }
+

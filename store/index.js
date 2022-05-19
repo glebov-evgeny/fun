@@ -1,5 +1,6 @@
 export const state = () => ({
   token: null
+  // token: 'test'
 });
 
 export const mutations = {
@@ -22,5 +23,5 @@ export const actions = {
 };
 
 export const getters = {
-  hasTiken: (s) => !!s.token,
+  hasToken: (s) => !!s.token,
 };

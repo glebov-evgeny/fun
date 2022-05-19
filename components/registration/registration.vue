@@ -1,17 +1,28 @@
 <template>
-  <div class="registration">
-    <h2 class="registration__title title">{{ formLogin ? 'Регистрация' : 'Вход' }}</h2>
-    <form class="form">
 
-        <div class="form-group">
-            <input type="email" class="form-input form-input-login" placeholder="Почта" v-model.trim="email"/>
-            <input type="password" class="form-input form-input-password" placeholder="Пароль" v-model.trim="password"/>
-        </div>
-        <button v-if="formLogin" class="form-btn" type="button" @click="createUser">Отправить</button>
-        <button v-else class="form-btn" type="button" @click="loginUser">Войти</button>
-        <button class="form-info" type="button" @click="formLogin = !formLogin">{{ formLogin ? '- Вход -' : '- Регистрация -' }}</button>
-    </form>
-  </div>
+
+    <div  class="registration">
+      <transition name="title-show" mode="out-in">
+        <h2 :key="formLogin" class="registration__title title">{{ formLogin ? 'Регистрация' : 'Вход' }}</h2>
+      </transition>
+      <form class="form" novalidate="true"  @submit="validateForm" >
+          <div class="form-group">
+              <label  class="form-label">
+                <input v-model.trim="email" type="email" class="form-input form-input-login" placeholder="Почта" :class="emailError ? 'error' : ''"/>
+                <p v-if="emailError" class="form-info">{{emailErrorInfo}}</p>
+              </label>
+              <label  class="form-label">
+                <input v-model.trim="password" type="password" class="form-input form-input-password" placeholder="Пароль"  :class="passwordError ? 'error' : ''"/>
+                <p v-if="passwordError" class="form-info">{{passwordErrorInfo}}</p>
+              </label>
+          </div>
+          <button class="form-btn" type="submit" >Отправить</button>
+          <button class="form-check" type="button" @click="formLogin = !formLogin">{{ formLogin ? '- Вход -' : '- Регистрация -' }}</button>
+      </form>
+    </div>
+
+
+
 </template>
 
 <script>
@@ -21,31 +32,77 @@ export default {
   data(){
     return{
       titlePage:'Регистрация',
-      formLogin: true,
-      email: '',
-      password: '',
+      formLogin: false,
+      email: null,
+      emailError: false,
+      emailErrorInfo: 'Укажите корректный email',
+      password: null,
+      passwordError: false,
+      passwordErrorInfo: 'Пароль должен быть больше 7 символов',
+      currentUser:{},
     }
   },
   methods: {
+    validateForm(e) {
+      if (this.email == null){
+       this.emailError = true
+      } else{
+        this.validEmail(this.email)
+      }
+
+      if (this.password == null){
+       this.passwordError = true
+      } else{
+        this.validPassword(this.password)
+      }
+
+      if( this.passwordError === false && this.emailError === false) {
+        if(this.formLogin === false){
+          this.loginUser()
+        } else {
+          this.createUser()
+        }
+      }
+      e.preventDefault();
+    },
+    validEmail(email) {
+      const result = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(result.test(email)){
+        this.emailError = false
+      } else{
+        this.emailError = true
+      }
+    },
+    validPassword(password) {
+      if(this.password.length > 6){
+        this.passwordError = false
+      } else{
+        this.passwordError = true
+      }
+    },
     async createUser() {
       try {
-        await this.$fire.auth.createUserWithEmailAndPassword(
+        const user = await this.$fire.auth.createUserWithEmailAndPassword(
           this.email,
           this.password,
-          this.$router.push('/users')
         )
+        this.$store.commit('setToken', user.user.uid)
+        this.$router.push('/main')
       } catch (e) {
 
       }
     },
     async loginUser() {
       try {
-        await this.$fire.auth.signInWithEmailAndPassword(
+         const user = await this.$fire.auth.signInWithEmailAndPassword(
           this.email,
-          this.password
-        );
-        this.$router.push("/user/1");
+          this.password,
+        )
+        this.$store.commit('setToken', user.user.uid)
+        this.$router.push('/main')
+
       } catch (e) {
+
       }
     }
   }
