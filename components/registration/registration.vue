@@ -17,7 +17,15 @@
               </label>
           </div>
           <button class="form-btn" type="submit" >Отправить</button>
-          <button class="form-check" type="button" @click="formLogin = !formLogin">{{ formLogin ? '- Вход -' : '- Регистрация -' }}</button>
+          <button class="form-check" type="button" @click="formLogin = !formLogin">{{ formLogin ? '- Войти -' : '- Зарегистрироваться -' }}</button>
+          <p v-if="!formLogin" class="form-text">- или войти так -</p>
+          <transition name="social-show" mode="out-in">
+            <div v-if="!formLogin" class="form-social-registration">
+              <button type="button" class="form-social-button" @click="signInGoogle">
+                <img src="images/common/icon-google-04.png" alt="icon" class="form-social-pic" />
+              </button>
+            </div>
+          </transition>
       </form>
     </div>
 
@@ -104,6 +112,12 @@ export default {
       } catch (e) {
 
       }
+    },
+    async signInGoogle() {
+      const provider = new this.$fireModule.auth.GoogleAuthProvider()
+      const user = await this.$fire.auth.signInWithPopup(provider)
+      this.$store.commit('setToken', user.user.uid)
+      this.$router.push('/main')
     }
   }
 };

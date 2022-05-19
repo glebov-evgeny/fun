@@ -90,7 +90,21 @@
     }
     &-check{
       font-size: rem(12);
+      color: #1a00ff;
       margin: rem(20) auto 0;
+    }
+    &-text{
+      font-size: rem(12);
+      margin: rem(20) auto 0;
+    }
+    &-social{
+      &-registration{
+        margin-top: rem(15);
+      }
+      &-button{
+        width: rem(25);
+        margin: 0 rem(15);
+      }
     }
   }
 }
@@ -102,6 +116,21 @@
     from{
       opacity: 0;
       transform: translateY(rem(-15));
+    }
+    to{
+      opacity: 1;
+      transform: translateY(rem(0));
+    }
+  }
+}
+.social-show-enter-active {
+  animation: showSocial .3s ease forwards;
+}
+.social-show-enter {
+  @keyframes showSocial {
+    from{
+      opacity: 0;
+      transform: translateY(rem(15));
     }
     to{
       opacity: 1;
