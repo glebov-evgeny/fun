@@ -1,12 +1,17 @@
 <template>
   <div class="container">
-    <h2>страничка</h2>
+      <Search />
   </div>
 </template>
 
 <script>
 
+import Search from "~/components/search/search";
+
 export default {
-   middleware: 'auth'
+  components: {
+    Search
+  },
+  middleware: 'auth',
 };
 </script>
